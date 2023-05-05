@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { ContextProvider } from "./context/Context";
+import LoginPage from "./pages/loginPage";
+import Dashboard from "./pages/dashboardPage";
+import RegisterPage from "./pages/registerPage";
+import ProfilePage from "./pages/profilePage";
+import PatchPassword from "./pages/patchPassword";
+import SingleConversation from "./Components/SingleConversation";
+import ForgotPassword from "./pages/forgotPassword";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContextProvider>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/" Component={LoginPage} />
+            <Route path="/dashboard" Component={Dashboard} />
+            <Route path="/signup" Component={RegisterPage} />
+            <Route path="/profile" Component={ProfilePage} />
+            <Route path="/chat" Component={SingleConversation} />
+            <Route path="/forgotPassword" Component={ForgotPassword} />
+            <Route path="/resetPassword/:token" Component={PatchPassword} />
+          </Routes>
+          <ToastContainer />
+        </div>
+      </Router>
+    </ContextProvider>
   );
 }
 
