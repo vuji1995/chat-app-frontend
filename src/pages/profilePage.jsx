@@ -18,13 +18,16 @@ const ProfilePage = () => {
         navigate(`/`);
         return toast.error(`Please log in!`);
       }
-      const response = await fetch(`http://127.0.0.1:6001/dashboard`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${tokenFromLocalStorage}`,
-        },
-      });
+      const response = await fetch(
+        `https://backend-chat-app-x5ta.onrender.com/dashboard`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenFromLocalStorage}`,
+          },
+        }
+      );
 
       const data = await response.json();
 

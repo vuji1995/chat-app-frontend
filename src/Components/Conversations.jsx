@@ -13,13 +13,16 @@ const Conversations = ({ data, currentUser, otherUserId }) => {
   //GET OTHERS USER DATA
   const getUser = async (id) => {
     try {
-      const response = await fetch(`http://127.0.0.1:6001/getUserData`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-      });
+      const response = await fetch(
+        `https://backend-chat-app-x5ta.onrender.com/getUserData`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        }
+      );
       const data = await response.json();
       setUserData(data.data.user);
     } catch (error) {
@@ -30,7 +33,7 @@ const Conversations = ({ data, currentUser, otherUserId }) => {
   const getMessages = async (id) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:6001/messages/getMessage/${id}`
+        `https://backend-chat-app-x5ta.onrender.com/messages/getMessage/${id}`
       );
       const data = await response.json();
       if (data.length > 0) {
@@ -53,7 +56,7 @@ const Conversations = ({ data, currentUser, otherUserId }) => {
   const getOtherUserProfileImage = async (user_id) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:6001/getOtherUserProfileImage`,
+        `https://backend-chat-app-x5ta.onrender.com/getOtherUserProfileImage`,
         {
           method: "POST",
           headers: {

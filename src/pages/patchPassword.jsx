@@ -49,7 +49,7 @@ const PatchPassword = () => {
     let token = extractTokenFromUrl(url);
 
     const response = await fetch(
-      `http://localhost:6001/resetPassword/${token}`,
+      `https://backend-chat-app-x5ta.onrender.com/resetPassword/${token}`,
       {
         method: "PATCH",
         headers: {
@@ -83,7 +83,7 @@ const PatchPassword = () => {
         </div>
         <div className="w-full">
           <input
-            type="text"
+            type="password"
             placeholder="password"
             className="px-5 py-3 rounded-xl bg-gray-200  h-12 mt-10 w-full"
             name="password"
@@ -92,7 +92,7 @@ const PatchPassword = () => {
         </div>
         <div className="w-full">
           <input
-            type="text"
+            type="password"
             placeholder="password"
             className="px-5 py-3 rounded-xl bg-gray-200  h-12 mt-5 mb-6 w-full"
             name="passwordConfirm"

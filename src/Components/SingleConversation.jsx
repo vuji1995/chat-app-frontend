@@ -26,7 +26,7 @@ const SingleConversation = () => {
   };
 
   useEffect(() => {
-    socket.current = io(`http://localhost:8800`);
+    socket.current = io(`https://socket-server-6dv1.onrender.com/`);
     socket.current.emit("new-user-add", chatData.currentUser);
     socket.current.on(`get-user`, (users) => {
       setOnlineUsers(users);
@@ -66,13 +66,16 @@ const SingleConversation = () => {
   useEffect(() => {
     const getUser = async (id) => {
       try {
-        const response = await fetch(`http://127.0.0.1:6001/getUserData`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id }),
-        });
+        const response = await fetch(
+          `https://backend-chat-app-x5ta.onrender.com/getUserData`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id }),
+          }
+        );
         const data = await response.json();
         setUserData(data.data.user);
       } catch (error) {
@@ -87,7 +90,7 @@ const SingleConversation = () => {
     const getMessages = async (id) => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:6001/messages/getMessage/${id}`
+          `https://backend-chat-app-x5ta.onrender.com/messages/getMessage/${id}`
         );
         const data = await response.json();
 
@@ -113,7 +116,7 @@ const SingleConversation = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:6001/messages/sendMessage`,
+        `https://backend-chat-app-x5ta.onrender.com/messages/sendMessage`,
         {
           method: "POST",
           headers: {

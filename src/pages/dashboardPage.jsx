@@ -20,20 +20,23 @@ const Dashboard = () => {
         return toast.error(`Please log in!`);
       }
 
-      const response = await fetch(`http://127.0.0.1:6001/dashboard`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${tokenFromLocalStorage}`,
-        },
-      });
+      const response = await fetch(
+        `https://backend-chat-app-x5ta.onrender.com/dashboard`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenFromLocalStorage}`,
+          },
+        }
+      );
 
       const data = await response.json();
 
       if (data.hasOwnProperty("data")) {
         try {
           const response = await fetch(
-            `http://127.0.0.1:6001/getProfileImage`,
+            `https://backend-chat-app-x5ta.onrender.com/getProfileImage`,
             {
               method: "POST",
               headers: {
@@ -73,7 +76,9 @@ const Dashboard = () => {
   const [chats, setChats] = useState([]);
 
   const userChats = async (id) => {
-    const response = await fetch(`http://127.0.0.1:6001/chat/${id}`);
+    const response = await fetch(
+      `https://backend-chat-app-x5ta.onrender.com/chat/${id}`
+    );
     const data = await response.json();
 
     setChats(data);
@@ -112,16 +117,19 @@ const Dashboard = () => {
     }
 
     try {
-      const response2 = await fetch(`http://127.0.0.1:6001/chat/getChats`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          senderID: userData.user_id,
-          receiverID: receiverID,
-        }),
-      });
+      const response2 = await fetch(
+        `https://backend-chat-app-x5ta.onrender.com/chat/getChats`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            senderID: userData.user_id,
+            receiverID: receiverID,
+          }),
+        }
+      );
       const data2 = await response2.json();
       if (data2.length > 0) {
         toast.error(`Chat with this user already exists!`);
@@ -132,16 +140,19 @@ const Dashboard = () => {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:6001/chat/createChat`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          senderID: userData.user_id,
-          receiverID: receiverID,
-        }),
-      });
+      const response = await fetch(
+        `https://backend-chat-app-x5ta.onrender.com/chat/createChat`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            senderID: userData.user_id,
+            receiverID: receiverID,
+          }),
+        }
+      );
       const data = await response.json();
       if (data.status === "failed") {
         toast.error(data.message);
@@ -165,7 +176,7 @@ const Dashboard = () => {
             <div className="flex flex-col items-center justify-center">
               <img
                 src={img}
-                alt="profilePic"
+                alt=""
                 className="h-20 w-20 rounded-full mt-14 top-0 left-0 object-cover"
               />
               <p className="text-xl font-bold  mt-2">{userData.name}</p>
@@ -290,7 +301,7 @@ const Dashboard = () => {
           <div className="flex flex-col items-center justify-center">
             <img
               src={img}
-              alt="profilePic"
+              alt=""
               className="h-18 w-18 rounded-full mt-14 top-0 left-0 object-cover md:h-24 md:w-24"
             />
             <p className="text-xl font-bold  mt-2">{userData.name}</p>

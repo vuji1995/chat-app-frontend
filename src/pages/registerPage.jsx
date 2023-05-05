@@ -91,13 +91,16 @@ const RegisterPage = () => {
       formData.append("phone", registerData.phone);
       formData.append("profilePicture", registerData.profilePicture);
 
-      const response = await fetch(`https://127.0.0.1:6001/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(registerData),
-      });
+      const response = await fetch(
+        `https://backend-chat-app-x5ta.onrender.com/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(registerData),
+        }
+      );
 
       const data = await response.json();
       if (data.status === "success") {
