@@ -16,6 +16,7 @@ const ForgotPassword = () => {
     const isValidEmail = validator.validate(email);
     if (!isValidEmail) {
       toast.error(`Email is not valid`);
+      setLoading(false);
       return;
     }
 

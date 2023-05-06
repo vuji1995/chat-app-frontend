@@ -36,6 +36,7 @@ const LoginPage = () => {
       );
 
       const data = await response.json();
+      setLoading(false);
       if (data.status === "failed") {
         toast.error(data.message, {
           position: "top-right",

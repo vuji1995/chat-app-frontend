@@ -40,11 +40,13 @@ const PatchPassword = () => {
       isPasswordValid(passwords.password) !== true ||
       isPasswordValid(passwords.passwordConfirm) !== true
     ) {
+      setLoading(false);
       toast.error(`Passwords need to have 8-20 characters`);
       return;
     }
 
     if (passwords.password !== passwords.passwordConfirm) {
+      setLoading(false);
       toast.error(`Passwords are not same!`);
       return;
     }
@@ -68,6 +70,7 @@ const PatchPassword = () => {
 
     if (data.status === "success") {
       toast.success("Password is changed successfully !");
+
       navigate(`/`);
     }
 

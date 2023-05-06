@@ -60,6 +60,7 @@ const RegisterPage = () => {
     setLoading(true);
 
     if (!isNameValid(registerData.name)) {
+      setLoading(false);
       return toast.error(
         `Name must be at least 2 characters long and max. 20 characters long`
       );
@@ -67,20 +68,24 @@ const RegisterPage = () => {
 
     const isValidEmail = validator.validate(registerData.email);
     if (!isValidEmail) {
+      setLoading(false);
       return toast.error(`Email is not valid`);
     }
 
     if (!isPasswordValid(registerData.password)) {
+      setLoading(false);
       return toast.error(
         `Password need to be min. 8 and max. 20 characters long without white spaces`
       );
     }
 
     if (registerData.password !== registerData.passwordConfirm) {
+      setLoading(false);
       return toast.error(`Password are not same!`);
     }
 
     if (!isValidPhoneNumber(registerData.phone)) {
+      setLoading(false);
       return toast.error(
         `Phone number needs to start with 091, 092, 095, 097, 098, 099 with length of 9 to 10 digits`
       );
