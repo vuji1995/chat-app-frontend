@@ -2,13 +2,17 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import validator from "email-validator";
 import { useNavigate } from "react-router-dom";
+import { css } from "@emotion/react";
+import { RingLoader } from "react-spinners";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const sendNewPassword = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const isValidEmail = validator.validate(email);
     if (!isValidEmail) {
       toast.error(`Email is not valid`);
@@ -26,6 +30,7 @@ const ForgotPassword = () => {
           body: JSON.stringify({ email }),
         }
       );
+      setLoading(false);
       const data = await response.json();
       if (data.status === "failed") {
         toast.error(data.message);
@@ -33,6 +38,7 @@ const ForgotPassword = () => {
 
       if (data.status === "success") {
         toast.success(data.message);
+        navigate(`/`);
       }
 
       if (data.status === "error") {
@@ -50,6 +56,12 @@ const ForgotPassword = () => {
   const goBack = () => {
     navigate(`/`);
   };
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-gray-200 p-5">
@@ -85,6 +97,17 @@ const ForgotPassword = () => {
             Send
           </button>
         </div>
+      </div>
+      <div
+        css={override}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <RingLoader size={100} color={"black"} loading={loading} />
       </div>
     </div>
   );

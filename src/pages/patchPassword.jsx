@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { css } from "@emotion/react";
+import { RingLoader } from "react-spinners";
 
 const PatchPassword = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [passwords, setPasswords] = useState({
     password: "",
     passwordConfirm: "",
@@ -32,6 +35,7 @@ const PatchPassword = () => {
   }
 
   const resetPassword = async () => {
+    setLoading(true);
     if (
       isPasswordValid(passwords.password) !== true ||
       isPasswordValid(passwords.passwordConfirm) !== true
@@ -59,16 +63,28 @@ const PatchPassword = () => {
       }
     );
 
+    setLoading(false);
     const data = await response.json();
 
     if (data.status === "success") {
       toast.success("Password is changed successfully !");
+      navigate(`/`);
     }
 
     if (data.status === "failed") {
       toast.error(data.message);
     }
+
+    if (data.status === "error") {
+      toast.error(`Error while trying to reset email! Please try again!`);
+    }
   };
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-gray-200 p-5">
@@ -113,6 +129,17 @@ const PatchPassword = () => {
             Reset
           </button>
         </div>
+      </div>
+      <div
+        css={override}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <RingLoader size={100} color={"black"} loading={loading} />
       </div>
     </div>
   );

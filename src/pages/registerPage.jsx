@@ -4,9 +4,12 @@ import { toast } from "react-toastify";
 import validator from "email-validator";
 import FormData from "form-data";
 import signupBG from "../assets/signupBG.jpg";
+import { css } from "@emotion/react";
+import { RingLoader } from "react-spinners";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",
@@ -54,6 +57,7 @@ const RegisterPage = () => {
   //REGISTER USER
   const registerUser = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!isNameValid(registerData.name)) {
       return toast.error(
@@ -102,6 +106,8 @@ const RegisterPage = () => {
         }
       );
 
+      setLoading(false);
+
       const data = await response.json();
       if (data.status === "success") {
         toast.success(`You have successfully signed up!`);
@@ -119,6 +125,12 @@ const RegisterPage = () => {
   const navigateTo = () => {
     navigate(`/`);
   };
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
 
   return (
     <div className="h-screen w-screen  flex flex-col items-center justify-between lg:flex-row">
@@ -190,6 +202,17 @@ const RegisterPage = () => {
         >
           Log in
         </button>
+      </div>
+      <div
+        css={override}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <RingLoader size={100} color={"black"} loading={loading} />
       </div>
     </div>
   );

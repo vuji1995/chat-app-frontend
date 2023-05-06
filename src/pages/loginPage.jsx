@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoginBG from "../assets/loginBg.jpg";
+import { css } from "@emotion/react";
+import { RingLoader } from "react-spinners";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,6 +23,7 @@ const LoginPage = () => {
   const login = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await fetch(
         "https://backend-chat-app-x5ta.onrender.com/login",
         {
@@ -62,6 +66,12 @@ const LoginPage = () => {
   const forgotPassword = () => {
     navigate(`/forgotPassword`);
   };
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
 
   return (
     <div className="h-screen w-screen  flex flex-col items-center  justify-between lg:flex-row">
@@ -116,6 +126,17 @@ const LoginPage = () => {
         >
           Sign up
         </button>
+      </div>
+      <div
+        css={override}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <RingLoader size={100} color={"black"} loading={loading} />
       </div>
     </div>
   );

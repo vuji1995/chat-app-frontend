@@ -7,6 +7,7 @@ export const ContextProvider = ({ children }) => {
   const [userData, setUserData] = useState("");
   const [newProfileImage, setNewProfileImage] = useState("");
   const [otherUserIdContext, setOtherUserIdContext] = useState("");
+  const [profileLoading, setProfileLoading] = useState(false);
 
   //SAVE PROFILE IMAGE
   const saveProfileImage = async (userData) => {
@@ -20,11 +21,15 @@ export const ContextProvider = ({ children }) => {
     const formData = new FormData();
     formData.append("user_id", user_id);
     formData.append("profilePicture", file);
+    setProfileLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:6001/uploadProfileIMG`, {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `https://backend-chat-app-x5ta.onrender.com/uploadProfileIMG`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -33,6 +38,7 @@ export const ContextProvider = ({ children }) => {
       const data = await response.json();
 
       setNewProfileImage(data);
+      setProfileLoading(false);
       toast.success(`Image saved!`);
     } catch (error) {
       console.log(error);
@@ -66,6 +72,8 @@ export const ContextProvider = ({ children }) => {
         otherUserIdContext,
         setOtherUserIdContext,
         formatDateAndTime,
+        profileLoading,
+        setProfileLoading,
       }}
     >
       {children}

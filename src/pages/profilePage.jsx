@@ -1,11 +1,14 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../context/Context";
 import { toast } from "react-toastify";
+import { css } from "@emotion/react";
+import { RingLoader } from "react-spinners";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const { saveProfileImage, userData, setUserData } = useContext(Context);
+  const { saveProfileImage, userData, setUserData, profileLoading } =
+    useContext(Context);
 
   const goBack = () => {
     navigate(`/dashboard`);
@@ -39,6 +42,12 @@ const ProfilePage = () => {
   const profileImageSave = () => {
     saveProfileImage(userData);
   };
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
 
   return (
     <div className="h-screen w-screen bg-slate-50 flex flex-col px-5 py-2">
@@ -109,6 +118,17 @@ const ProfilePage = () => {
             <span className=" text-xl ">{userData.role}</span>
           </div>
         </div>
+      </div>
+      <div
+        css={override}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <RingLoader size={100} color={"black"} loading={profileLoading} />
       </div>
     </div>
   );
