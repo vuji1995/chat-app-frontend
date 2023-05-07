@@ -24,7 +24,7 @@ export const ContextProvider = ({ children }) => {
     setProfileLoading(true);
     try {
       const response = await fetch(
-        `https://backend-chat-app-x5ta.onrender.com/uploadProfileIMG`,
+        `http://34.159.65.64:6001/uploadProfileIMG`,
         {
           method: "POST",
           body: formData,

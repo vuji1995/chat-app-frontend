@@ -25,7 +25,7 @@ const LoginPage = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://backend-chat-app-x5ta.onrender.com/login",
+        "http://34.159.65.64:6001/login",
         {
           method: "POST",
           headers: {

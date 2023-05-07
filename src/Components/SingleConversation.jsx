@@ -66,16 +66,13 @@ const SingleConversation = () => {
   useEffect(() => {
     const getUser = async (id) => {
       try {
-        const response = await fetch(
-          `https://backend-chat-app-x5ta.onrender.com/getUserData`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ id }),
-          }
-        );
+        const response = await fetch(`http://34.159.65.64:6001/getUserData`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        });
         const data = await response.json();
         setUserData(data.data.user);
       } catch (error) {
@@ -90,7 +87,7 @@ const SingleConversation = () => {
     const getMessages = async (id) => {
       try {
         const response = await fetch(
-          `https://backend-chat-app-x5ta.onrender.com/messages/getMessage/${id}`
+          `http://34.159.65.64:6001/messages/getMessage/${id}`
         );
         const data = await response.json();
 
@@ -116,7 +113,7 @@ const SingleConversation = () => {
 
     try {
       const response = await fetch(
-        `https://backend-chat-app-x5ta.onrender.com/messages/sendMessage`,
+        `http://34.159.65.64:6001/messages/sendMessage`,
         {
           method: "POST",
           headers: {

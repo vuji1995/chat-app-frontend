@@ -55,7 +55,7 @@ const PatchPassword = () => {
     let token = extractTokenFromUrl(url);
 
     const response = await fetch(
-      `https://backend-chat-app-x5ta.onrender.com/resetPassword/${token}`,
+      `http://34.159.65.64:6001/resetPassword/${token}`,
       {
         method: "PATCH",
         headers: {
