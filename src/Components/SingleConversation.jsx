@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { format } from "timeago.js";
 import InputEmojiWithRef from "react-input-emoji";
 import { io } from "socket.io-client";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const SingleConversation = () => {
   const [userData, setUserData] = useState(null);
@@ -26,7 +26,7 @@ const SingleConversation = () => {
   };
 
   useEffect(() => {
-    socket.current = io(`https://socket-server-6dv1.onrender.com/`);
+    socket.current = io(`http://localhost:8800`);
     socket.current.emit("new-user-add", chatData.currentUser);
     socket.current.on(`get-user`, (users) => {
       setOnlineUsers(users);

@@ -21,16 +21,13 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await fetch(
-        `https://backend-chat-app-x5ta.onrender.com/forgotPassword`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }),
-        }
-      );
+      const response = await fetch(`http://34.159.65.64:6001/forgotPassword`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
       setLoading(false);
       const data = await response.json();
       if (data.status === "failed") {
