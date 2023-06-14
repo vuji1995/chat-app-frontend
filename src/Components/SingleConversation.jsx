@@ -26,7 +26,7 @@ const SingleConversation = () => {
   };
 
   useEffect(() => {
-    socket.current = io(`http://localhost:8800`);
+    socket.current = io(`http://34.141.84.183:8800`);
     socket.current.emit("new-user-add", chatData.currentUser);
     socket.current.on(`get-user`, (users) => {
       setOnlineUsers(users);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import LoginBG from "../assets/loginBg.jpg";
+import LoginBG from "../assets/loginBgReduced.webp";
 import { css } from "@emotion/react";
 import { RingLoader } from "react-spinners";
 
@@ -24,16 +24,13 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await fetch(
-        "http://34.159.65.64:6001/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("http://34.159.65.64:6001/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
       setLoading(false);

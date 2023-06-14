@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import validator from "email-validator";
 import FormData from "form-data";
-import signupBG from "../assets/signupBG.jpg";
+import signupBG from "../assets/signupBGReduced.webp";
 import { css } from "@emotion/react";
 import { RingLoader } from "react-spinners";
 
