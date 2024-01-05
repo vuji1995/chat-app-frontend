@@ -18,7 +18,7 @@ const RegisterPage = () => {
     phone: "",
     profilePicture: "",
   });
-
+  //aaaa
   const onChange = (e) => {
     if (e.target.name === "profilePicture") {
       setRegisterData((prevState) => ({
