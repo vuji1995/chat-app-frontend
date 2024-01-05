@@ -12,6 +12,8 @@ const Dashboard = () => {
   const [createChatModal, setCreateChatModal] = useState(false);
   const [img, setImg] = useState("");
 
+  console.log("test123");
+
   useEffect(() => {
     const verifyLocalStorageToken = async () => {
       const tokenFromLocalStorage = localStorage.getItem(`token`);
